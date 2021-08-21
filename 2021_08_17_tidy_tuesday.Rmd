@@ -1,0 +1,115 @@
+---
+title: "TidyTemplate"
+date: 2021-08-20
+output: html_output
+---
+
+# TidyTuesday
+
+Join the R4DS Online Learning Community in the weekly #TidyTuesday event!
+Every week we post a raw dataset, a chart or article related to that dataset, and ask you to explore the data.
+While the dataset will be “tamed”, it will not always be tidy! As such you might need to apply various R for Data Science techniques to wrangle the data into a true tidy format.
+The goal of TidyTuesday is to apply your R skills, get feedback, explore other’s work, and connect with the greater #RStats community!
+As such we encourage everyone of all skills to participate!
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidytuesdayR)
+
+```
+
+# Load the weekly Data
+
+Dowload the weekly data and make available in the `tt` object.
+
+```{r Load}
+
+tt <- tt_load("2021-08-17")
+
+```
+
+
+# Readme
+
+Take a look at the readme for the weekly data to get insight on the dataset.
+This includes a data dictionary, source, and a link to an article on the data.
+
+```{r Readme, eval = interactive()}
+
+tt
+
+```
+
+
+# Glimpse Data
+
+Take an initial look at the format of the data available.
+
+```{r Glimpse}
+
+tt %>% 
+  map(glimpse)
+
+```
+
+# Wrangle
+
+Explore the data and process it into a nice format for plotting! Access each dataset by name by using a dollarsign after the `tt` object and then the name of the data set.
+
+```{r Wrangle}
+
+computer <- tt[[1]]
+
+```
+
+
+# Visualize
+
+Using your processed dataset, create your unique visualization.
+
+```{r Visualize}
+# Trying to mimic what Moriah Taylor submitted
+# https://twitter.com/moriah_taylor58/status/1428528721317744640
+computer %>%
+  filter(!is.na(domain)) %>%
+  filter(char %in% c("Worf", "Troi", "Riker", "Picard", "Geordi", "Data", "Beverly")) %>%
+  mutate(type = str_to_lower(type)) %>%
+  mutate(domain = ifelse(domain=="Iot", "IoT", domain)) %>%
+  ggplot() + 
+    geom_bar(aes(x = char, fill = domain), position = "fill") + 
+    coord_flip() + 
+    ggtitle("Speech Command Categories by Character") +
+    xlab(NULL) + 
+    ylab(NULL) + 
+    scale_fill_brewer()
+
+```
+
+# Things To Learn
+* Make plot area a square?
+* Change font of captions/titles?
+* Change color palette using `scale_fill_manual` and `scale_color_manual`
+* Centering plot title
+* Remove legend title
+* Create plot caption and center it - "David Failing | @david_failing | #TidyTuesday Week 34"
+
+# Save Image
+
+Save your image for sharing. Be sure to use the `#TidyTuesday` hashtag in your post on twitter! 
+
+```{r}
+
+# This will save your most recent plot
+ggsave(
+  filename = "My TidyTuesday Plot.png",
+  device = "png")
+
+```
+
+# Other After The Fact Stuff
+* Use Carbon to share beautiful code pics: https://carbon.now.sh/
+* Post Gist to Carbon from RStudio: https://github.com/MilesMcBain/gistfo
+* Post to Carbon from RStudio: https://github.com/yonicd/carbonate

@@ -1,0 +1,30 @@
+---
+title: "Resources for TidyTuesday"
+author: "David Failing"
+date: "8/20/2021"
+output: pdf_document
+---
+
+```{r}
+# Get Started Each Week!
+## Initialize a template
+## with this weeks TidyTuesday!
+tidytuesdayR::use_tidytemplate()
+```
+
+* Homepage: https://github.com/rfordatascience/tidytuesday
+  * _ALL_ data are posted on _Mondays_ w/article link and data source.
+  * *GOAL:* Practice tidying and plotting skills.
+  * *GOAL:* Apply your R skills, get feedback, explore other’s work, and connect with the greater #RStats community.
+  * "an emphasis was placed on understanding how to summarize and arrange data to make meaningful charts with ggplot2, tidyr, dplyr, and other tools in the tidyverse ecosystem."
+  * "Every week we post a raw dataset, a chart or article related to that dataset, and ask you to explore the data"
+
+* Sharing Your Work:
+  1. Add alt text to posted graphics, possibly using `{rtweet}`
+  2. tt_available()
+  
+* Documentation:
+  - *Cleaning Script* - could be good for me to learn from for a workflow
+  - Data dictionary
+  - Data source
+  - Link to an article on the data

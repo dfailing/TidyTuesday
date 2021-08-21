@@ -1,0 +1,28 @@
+---
+title: "Star Trek Voice Commands"
+author: "David Failing"
+date: "8/20/2021"
+output: pdf_document
+---
+
+```{r}
+install.packages("tidytuesdayR")
+library(tidytuesdayR)
+library(tidyverse)
+
+computer <- tidytuesdayR::tt_load(tidytuesdayR::last_tuesday())[[1]]
+tidytuesdayR::last_tuesday()
+
+unique(computer$char)
+computer %>%
+  filter(!is.na(domain)) %>%
+  filter(char %in% c("Worf", "Troi", "Riker", "Picard", "Geordi", "Data", "Beverly")) %>%
+  mutate(type = str_to_lower(type)) %>%
+  ggplot() + 
+    geom_bar(aes(x = char, color = domain, fill = domain), position = "fill") + 
+    coord_flip() + 
+    ggtitle("Speech Command Categories by Character") +
+    xlab(NULL) + 
+    ylab(NULL)
+?labs
+```
